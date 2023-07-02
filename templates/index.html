@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Database</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <h1>Student Database</h1>
+    <form method="POST" action="/">
+        {{ form.csrf_token }}
+        <div>
+            <label for="name">Name:</label>
+            {{ form.name }}
+        </div>
+        <br>
+        <div>
+            <label for="college">College:</label>
+            {{ form.college }}
+        </div>
+        <br>
+        <div>
+            <label for="roll_no">Roll Number:</label>
+            {{ form.roll_no }}
+        </div>
+        <br>
+        <div>
+            {{ form.submit }}
+        </div>
+    </form>
+    {% if form.name.errors %}
+    <ul class="errors">
+        {% for error in form.name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <br>
+    <h2>Submitted Students:</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>College</th>
+            <th>Roll Number</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.college }}</td>
+            <td>{{ student.roll_no }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
